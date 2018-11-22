@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define read() freopen("input.txt", "r", stdin);
+#define write() freopen("output.txt", "w", stdout);
+#define ll long long int 
+
+
+int main()
+{
+	#ifdef asiuzzaman
+	read(); write();
+	#endif
+    
+    int Node,Edge;
+     
+     while(scanf("%d",&Node)==1) {
+     	   if(Node==0) break;
+            cin>>Edge;
+            
+
+                vector<int> graph[205];
+                 int visited[209];
+
+                 memset(visited,-1,sizeof(visited));
+
+               for(int i=0;i<Edge;i++)
+               {
+                int x,y;
+                cin>>x>>y;
+                graph[x].push_back(y);
+                graph[y].push_back(x);
+               }
+
+
+           queue<int>Q;
+ 	      visited[0]=0;
+ 	       Q.push(0);
+     
+         bool flag=false;
+
+ 	  while(!Q.empty()) {
+ 	   int  u=Q.front();
+ 	    Q.pop();
+
+ 	    for(int i=0;i<graph[u].size();i++)
+ 	    {
+ 	    	int v=graph[u][i];  /// v hoccche child
+ 	    	                        // u hocche parent.
+ 	    	
+ 	    	if(visited[v]==-1)     // yet not visited.
+ 	    	{
+ 	    		if(visited[u]==0)   // v er parent jodi visited thake.
+ 	    		{
+ 	    			visited[v]=1;  // tahole tar child k visit number 1 dao.
+ 	    		}
+ 	    		else
+ 	    		{
+ 	    		   visited[v]=0;	 // parent jodi na visited thake tahole tar child k visit kor.
+
+ 	    		}
+ 	    		Q.push(v);    // push too korte hobe e
+ 	    	}
+ 	    	else
+ 	    	{
+ 	    		if(visited[u]==visited[v]) {flag=1; break;}
+
+ 	    	}
+ 	    }
+
+ 	  if(flag) break;
+ 	}
+
+ 	if(!flag) cout<<"BICOLORABLE."<<std::endl;
+ 	else cout<<"NOT BICOLORABLE."<<endl;
+ 	
+         
+     }
+
+
+   
+}
