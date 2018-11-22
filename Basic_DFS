@@ -1,1 +1,77 @@
+Problem Link.////////////https://www.hackerrank.com/challenges/torque-and-development/problem
 
+#include<bits/stdc++.h>
+using namespace std;
+#define read() freopen("input.txt", "r", stdin);
+#define write() freopen("output.txt", "w", stdout);
+#define ll long long int 
+
+
+std::vector<int > adj[100009];
+bool visited[100009];
+ll nodes;
+
+
+void DFS(int n)
+{
+	nodes++;
+	//cout<<"the node: "<<nodes<<endl;
+	visited[n]=true;
+	for(auto i=adj[n].begin();i!=adj[n].end();i++)
+	{
+		if(!visited[*i])
+			DFS(*i);
+	}
+}
+
+
+int main()
+{
+	#ifdef asiuzzaman
+	read(); write();
+	#endif
+    
+    int T;
+    cin>>T;
+    while(T--)
+    {
+    	int N,M,a,b;
+    	ll X,Y;
+    	cin>>N>>M>>X>>Y;
+
+    	for(int i=0;i<M;i++)
+    	{
+    		cin>>a>>b;
+    		adj[a].push_back(b);
+    		adj[b].push_back(a);
+    	}
+          long cost=0;
+    	for(int i=0;i<N;i++)
+    	{
+
+
+    		if(!visited[i])
+    		{
+    			nodes=0;
+    			DFS(i);
+    			cost=cost+X;
+    			if(X>Y)
+    			{
+    				cost=cost+(Y*(nodes-1));
+
+    			}
+    			else 
+    				cost=cost+(X*(nodes-1));
+    		}
+    	}
+    	cout<<cost<<endl;
+    	for(int i=0;i<=N;i++)
+    	{
+    		  adj[i].clear();
+    		  visited[i]=false;
+    	}
+    }
+    
+
+   
+}
