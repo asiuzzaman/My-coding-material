@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define read() freopen("input.txt", "r", stdin);
+#define write() freopen("output.txt", "w", stdout);
+#define ll long long int 
+
+struct Node 
+{ 
+    int data; 
+    Node* left, * right; 
+}; 
+  
+Node* CreateNode(int data) 
+{ 
+    Node* node = new Node();
+    node->data = data; 
+    node->left =NULL;
+    node->right = NULL; 
+    
+    return node; 
+} 
+ // Function to insert nodes in level order 
+Node* insertLevelOrder(int arr[], Node* root, int i, int n) 
+{ 
+	  
+    if (i < n) 
+    {    
+
+        Node* temp = CreateNode(arr[i]); 
+        root = temp; 
+  
+        // insert left child 
+        root->left = insertLevelOrder(arr, root->left, 2 * i + 1, n); 
+        // insert right child 
+        root->right = insertLevelOrder(arr,root->right, 2 * i + 2, n); 
+    } 
+    return root; 
+} 
+ 
+void inOrder(Node* root) 
+{ 
+    if (root != NULL) 
+    {    
+    	//cout<<root->data<<" ";
+        inOrder(root->left); 
+       // cout << root->data <<" ";
+        inOrder(root->right); 
+        cout<<root->data<<" ";
+    } 
+} 
+  
+
+
+
+int main()
+{
+	#ifdef asiuzzaman
+	read(); write();
+	#endif
+    
+    int arr[] = { 1, 2, 3, 4, 5, 6, 6, 6, 6 }; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+        
+        Node *root;
+     
+     root = insertLevelOrder(arr, root, 0, n); 
+    inOrder(root); 
+
+}
