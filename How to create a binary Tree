@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define read() freopen("input.txt", "r", stdin);
+#define write() freopen("output.txt", "w", stdout);
+#define ll long long int 
+
+struct Node
+{
+	int data;
+    Node *left;
+    Node *right;
+};
+
+Node *createnode(int item)
+{
+	Node *temp=new Node();
+    if(temp==NULL) {cout<<" Error!! Could not create a new node"<<endl; exit(1);}
+
+   
+    temp->data=item;
+    temp->left=NULL;
+    temp->right=NULL;
+
+    return temp;
+}
+
+void add_left_child(Node *node, Node *child)
+{
+	node->left=child;
+}
+
+void add_right_child(Node *node, Node *child)
+{
+	node->right=child;
+}
+
+Node *createtree()
+{
+	Node *two=createnode(2);
+	Node *seven=createnode(7);
+	Node *nine=createnode(9);
+	add_left_child(two,seven);
+	add_right_child(two,nine);
+
+    Node *one=createnode(1);
+    Node *six=createnode(6);
+    Node *eight=createnode(8);
+
+    add_left_child(seven,one);
+    add_right_child(seven,six);
+    add_right_child(nine,eight);
+
+
+    Node *five=createnode(5);
+    Node *ten=createnode(10);
+    Node *three=createnode(3);
+    Node *four=createnode(4);
+
+    add_left_child(six,five);
+    add_right_child(six,ten);
+    add_left_child(eight,three);
+    add_right_child(eight,four);
+
+
+    return two;
+
+}
+int main()
+{
+	#ifdef asiuzzaman
+	read(); write();
+	#endif
+    Node *root=createtree();
+    cout<<root->data<<endl;
+    
+
+   
+}
+
+            2
+          /  \
+         7    9
+        / \     \
+       1   6     8
+          / \   / \
+          5 10 3   4
